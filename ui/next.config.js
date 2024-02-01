@@ -5,15 +5,7 @@ const nextConfig = {
   images: {
     domains: ["lh3.googleusercontent.com","i.pinimg.com"],
   },
-  trailingSlash: true,
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/:path*`,
-      },
-    ];
-  },
+ 
 };
 
 module.exports = nextConfig;
