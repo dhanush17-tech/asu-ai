@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactNode } from "react";
 import { Maximize } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -31,9 +31,9 @@ import {
 import Link from "next/link";
 
 export default function Page() {
-  const [collections, setCollections] = useState([]);
+  const [collections, setCollections] = useState<Collection[]>([]);
   const [currentCollectionsPage, setCurrentCollectionsPage] = useState(1);
-  const [currentCollectionsRows, setCurrentCollectionsRows] = useState([]);
+  const [currentCollectionsRows, setCurrentCollectionsRows] = useState<Collection[]>([]);
   const collectionsRowsPerPage = 10;
 
   useEffect(() => {
@@ -52,20 +52,20 @@ export default function Page() {
     setCurrentCollectionsRows(updatedCurrentCollectionsRows);
   }, [currentCollectionsPage, collections]);
   
-  const vectorStorePaginate = (pageNumber) => {
+  const vectorStorePaginate = (pageNumber:number) => {
     setCurrentCollectionsPage(pageNumber);
   };
 
-  const [chatHistory, setChatHistory] = useState([]);
+  const [chatHistory, setChatHistory] = useState<ChatHistoryItem[]>([]);
   const [currentChatHistoryPage, setCurrentChatHistoryPage] = useState(1);
-  const [currentChatRows, setCurrentChatRows] = useState([]);
+  const [currentChatRows, setCurrentChatRows] = useState<ChatHistoryItem[]>([]);
   const chatHistoyRowsPerPage = 50;
 
   useEffect(() => {
     fetch("/api/v1/chat_history")
       .then((response) => response.json())
       .then((data) => {
-        const history = data.response;
+        const history :ChatHistoryItem[]= data.response;
         if (Array.isArray(history)) {
           setChatHistory(history);
         } else {
@@ -84,11 +84,11 @@ export default function Page() {
     setCurrentChatRows(updatedCurrentChatRows);
   }, [currentChatHistoryPage, chatHistory]);
 
-  const chatHistoryPaginate = (pageNumber) => {
+  const chatHistoryPaginate = (pageNumber:number) => {
     setCurrentChatHistoryPage(pageNumber);
   };
 
-  const getPaginationContent = (currentPage, totalPages, paginationFunc) => {
+  const getPaginationContent = (currentPage: number, totalPages: number, paginationFunc: { (pageNumber: any): void; (pageNumber: any): void; (arg0: number): void; }) => {
     const paginationContent = [];
     
     if (currentPage - 1 > 0) {
@@ -297,4 +297,17 @@ export default function Page() {
       </div>
     </div>
   );
+}
+interface ChatHistoryItem {
+  session_id: string;
+  human: string;
+  ai: string;
+  timestamp: number; // or string if the timestamp is in ISO format
+}
+
+interface Collection {
+  id: string;
+  name: string;
+  tenant?: string;
+  database?: string;
 }

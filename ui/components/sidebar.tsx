@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-import { Playlist } from "../data/playlists";
+// import { Playlist } from "../data/playlists";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
-  playlists: Playlist[];
+  // playlists: Playlist[];
 }
 
 export function Sidebar({ className }: SidebarProps) {

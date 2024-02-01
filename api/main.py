@@ -4,7 +4,7 @@ from fastapi import FastAPI
 
 from routes import admin, api
 
-load_dotenv(".env")
+
 
 app = FastAPI(title="Embedchain API")
 

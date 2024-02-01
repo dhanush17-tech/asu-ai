@@ -32,16 +32,18 @@ export default function Page({
 }: {
   params: { collection_name: string };
 }) {
-  const [collectionData, setCollectionData] = useState([]);
+  const [collectionData, setCollectionData] = useState<{ data: CollectionItem[] }>({ data: [] });
   console.log(params);
 
   useEffect(() => {
     fetch(`/api/v1/admin/collections/chromadb/${params.collection_name}`)
       .then((response) => response.json())
       .then((data) => {
+        // Assuming the data returned by the API has a `data` property which is an array
         setCollectionData(data);
       });
-  }, []);
+  }, [params.collection_name]); // You should also include `params.collection_name` in the dependencies array
+  
 
   return (
     <div className="mt-20 flex justify-center items-center">
@@ -57,7 +59,7 @@ export default function Page({
           </div>
           <h3 className="text-sm text-muted-foreground">
             List of document chunks present in your collection:{" "}
-            <span className="bg-gray-100">'{params.collection_name}'</span> in
+            <span className="bg-gray-100">{params.collection_name}</span> in
             chromadb vector store.
           </h3>
           <Separator className="my-4" />
@@ -72,8 +74,8 @@ export default function Page({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {collectionData?.data &&
-                collectionData.data.map((c, index) => (
+            {collectionData.data && collectionData.data.map((c: CollectionItem, index: number) => (
+
                   <TableRow key={index} className="text-xs">
                     <TableCell className="text-xs">
                       {c.metadata.app_id}
@@ -124,4 +126,15 @@ export default function Page({
       </div>
     </div>
   );
+}
+
+interface CollectionItem {
+  metadata: {
+    app_id: string;
+    url: string;
+    data_type: string;
+    hash: string;
+  };
+  document: string;
+  // Add other properties as per the actual data structure
 }
