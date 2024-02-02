@@ -86,7 +86,7 @@ We welcome contributions! If you have suggestions or want to improve the ASU AI 
 ## License
 MIT License
 
-Copyright (c) [year] [full name]
+Copyright (c) [2023] [Dhanush Vardhan]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
