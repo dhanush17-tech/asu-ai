@@ -31,7 +31,7 @@ export function ChatCard({ sessionId }: ChatCardProps) {
   const sendQuery = async (query: string, sessionId: string) => {
     try {
       const response = await axios.get(
-        "/api/v1/chat?query=" + query + "&session_id=" + sessionId,
+        "https://asu-ai-api.fly.dev/api/v1/chat?query=" + query + "&session_id=" + sessionId,
       );
       setMessages((prevMessages) => [
         ...prevMessages, // Spread the previous messages
