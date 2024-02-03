@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, responses
 from pydantic import BaseModel
@@ -22,8 +23,9 @@ app.add_middleware(
     allow_methods=["GET", "POST", "OPTIONS"],  # Specify allowed methods
     allow_headers=["X-Requested-With", "Content-Type", "Authorization"],  # Specify allowed headers
 )
-embedchain_app.add("https://tuition.asu.edu")
-
+embedchain_app.add("https://housing.asu.edu")
+embedchain_app.add("https://live-housing-d9.pantheonsite.io/sitemap.xml", data_type='sitemap')
+embedchain_app.add("https://housing.asu.edu/housing-resources/housing-rates-and-costs")
 embedchain_app.add('https://tuition.asu.edu/sitemap.xml', data_type='sitemap')
 embedchain_app.add('https://fullcircle.asu.edu/faculty-sitemap.xml', data_type='sitemap')
 embedchain_app.add('https://fullcircle.asu.edu/external_news-sitemap.xml', data_type='sitemap')
@@ -76,6 +78,5 @@ async def handle_chat(question_model: QuestionModel):
 async def root():
     return responses.RedirectResponse(url="/docs")
 
-if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, log_level="info",
-                reload=True, timeout_keep_alive=600)
+if __name__ == '__main__':
+    app.run(debug=True, port=os.getenv("PORT", default=5000))

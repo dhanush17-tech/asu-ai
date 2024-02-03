@@ -13,7 +13,7 @@ The ASU AI chatbot is an interactive tool designed to assist users by providing 
 
 ## Features
 
-Built using [EmbedChain](embedchain.ai), [NextJS](nextjs.org), [Fly.io](fly.io), [React](react.dev)
+Built using [EmbedChain](https://embedchain.ai), [NextJS](https://nextjs.org), [Railway](https://railway.app), [React](https://react.dev)
 
 ## Getting Started
 

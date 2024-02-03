@@ -12,7 +12,10 @@ export function MainNav({
 }: React.HTMLAttributes<HTMLElement>) {
   return (
     <nav
-      className={cn("flex flex-row justify-between items-center space-x-4 lg:space-x-6 w-full", className)}
+      className={cn(
+        "flex flex-row justify-between items-center space-x-4 lg:space-x-6 w-full",
+        className
+      )}
       {...props}
     >
       <div className="flex items-center space-x-4 lg:space-x-6">
@@ -26,20 +29,20 @@ export function MainNav({
         </Link>
       </div>
 
-      <div   className={cn("space-x-10", className)}>
+      <div className={cn("space-x-10", className)}>
         <Link
-          href="/admin"
+          href="https://twitter.com/geeky_dan"
           className="text-sm font-light text-muted-foreground transition-colors hover:text-primary hover:text-black"
         >
-          Admin
+          Developer
         </Link>
         <Link
-        href="https://github.com/embedchain/embedchain"
-        className="text-sm font-light text-muted-foreground transition-colors hover:text-primary hover:text-black"
-        target="_blank"
-      >
-        GitHub
-      </Link>
+          href="github.com/dhanush17-tech/asu-ai"
+          className="text-sm font-light text-muted-foreground transition-colors hover:text-primary hover:text-black"
+          target="_blank"
+        >
+          GitHub
+        </Link>
         {/* ... other links ... */}
       </div>
     </nav>
